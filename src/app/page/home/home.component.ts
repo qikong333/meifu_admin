@@ -7,6 +7,7 @@ import { FileUploader } from 'ng2-file-upload';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
   public uploader2: FileUploader;
   URL = 'd';
   editorContent = '<p>Some html</p>';
@@ -18,7 +19,9 @@ export class HomeComponent implements OnInit {
       ['link', 'image', 'video']                         // link and image, video
     ]
   };
-  constructor() { }
+  constructor() {
+    console.log(URL);
+  }
 
   ngOnInit() {
 
