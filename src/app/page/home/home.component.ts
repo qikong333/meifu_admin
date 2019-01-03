@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+import { URL } from '../../config/config';
 
 @Component({
   selector: 'app-home',
@@ -9,26 +10,17 @@ import { FileUploader } from 'ng2-file-upload';
 export class HomeComponent implements OnInit {
 
   public uploader2: FileUploader;
-  URL = 'd';
   editorContent = '<p>Some html</p>';
-  config = {
-    toolbar: [
-      ['blockquote', 'code-block'],
-      [{ 'header': 1 }, { 'header': 2 }],               // custom button values
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      ['link', 'image', 'video']                         // link and image, video
-    ]
-  };
+
   constructor() {
-    console.log(URL);
   }
 
   ngOnInit() {
 
     this.uploader2 = new FileUploader({
-      url: this.URL
+      url: URL + '/bannerAdd'
       , method: 'POST'
-      , itemAlias: 'upfile'
+      , itemAlias: 'img'
       , autoUpload: true
     });
     this.uploader2.onSuccessItem = function (item, response, status, headers) {
@@ -36,6 +28,8 @@ export class HomeComponent implements OnInit {
         const rsp = JSON.parse(response);
         const img = '<img class="camera" src="' + 'http://您的域坝' + rsp.url + '" alt="">';
         this.data.content += img;
+      } else {
+        console.log(response);
       }
     };
   }
