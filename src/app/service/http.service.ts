@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { URL } from '../config/config';
 import { Observable } from 'rxjs';
+import { URLSearchParams } from 'url';
 @Injectable({
   providedIn: 'root'
 })
@@ -71,14 +72,19 @@ export class HttpService {
   }
 
   public static buildURLSearchParams(paramMap) {
-    for (const key of Object.keys(paramMap)) {
-      let val = paramMap[key];
-      if (val instanceof Date) {
-        val = HttpService.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
+    if (paramMap) {
+      console.log(paramMap);
+      let params = new HttpParams();
+      for (const key of Object.keys(paramMap)) {
+        let val = paramMap[key];
+        if (val instanceof Date) {
+          val = HttpService.dateFormat(val, 'yyyy-MM-dd hh:mm:ss');
+        }
+        params = params.set(key, val);
+        console.log(params);
       }
-      if (paramMap) {
-        return new HttpParams().set(key, val);
-      }
+
+      return params;
     }
   }
 
