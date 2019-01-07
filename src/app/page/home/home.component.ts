@@ -12,45 +12,30 @@ import { Subscriber } from 'rxjs';
 export class HomeComponent implements OnInit {
 
   public uploader2: FileUploader;
-  editorContent = '<p>Some html</p>';
+  public textDetail = '<p>Some html</p>';
 
   constructor(public http: HttpService) {
-    this.http.get('/bannerGet', {
-      name: '444',
-      Image: '222222'
-    })
-      .subscribe(e => {
-        console.log(e);
-      });
-
-
-    this.upload();
   }
 
   ngOnInit() {
-
     this.uploader2 = new FileUploader({
       url: URL + '/upLoad'
       , method: 'POST'
       , itemAlias: 'image'
       , autoUpload: true
     });
-    this.uploader2.onSuccessItem = function (item, response, status, headers) {
+    this.uploader2.onSuccessItem = (item, response, status, headers) => {
       console.log(response);
       if (status === 200) {
         const rsp = JSON.parse(response);
-        const img = '<img class="camera" src="' + 'http://您的域坝' + rsp.url + '" alt="">';
-        this.data.content += img;
+        const img = '<img class="camera" src="' + rsp.data.image_url + '" alt="">';
+        console.log(img);
+        this.textDetail += img;
       } else {
         console.log(response);
       }
     };
   }
-
-  aa(e) {
-    console.log(e);
-  }
-
 
   upload() {
     const p = {
@@ -62,4 +47,6 @@ export class HomeComponent implements OnInit {
         console.log(e);
       });
   }
+
 }
+

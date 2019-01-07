@@ -1,4 +1,4 @@
-<quill-editor [style]="{height: '500px'}" [(ngModel)]="editorContent">
+<quill-editor [style]="{height: '500px'}" [(ngModel)]="textDetail">
   <div quill-editor-toolbar>
     <span class="ql-formats">
       <button type="button" class="ql-header" value="1"></button>
@@ -27,8 +27,13 @@
   </div>
 </quill-editor>
 
-<div class="content" [innerHtml]="editorContent"></div>
+<div class="content" [innerHtml]="textDetail"></div>
 
 <div>
-
+  banner名称：
+  <input type="text" name="" id="">
+</div>
+<div>
+  图片上传：
+  <input style="display:none" id="file" type="file" class="file_input" ng2FileSelect [uploader]="uploader2" />
 </div>

@@ -10,10 +10,16 @@ import { HomeComponent } from './page/home/home.component';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { NewesComponent } from './page/newes/newes.component';
+import { AboutComponent } from './page/about/about.component';
+import { ProductsComponent } from './page/products/products.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    NewesComponent,
+    AboutComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule, CKEditorModule,
