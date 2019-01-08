@@ -10,10 +10,10 @@ import { Subscriber } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  public img: string;
+  public imgUrl: string;
   public uploader2: FileUploader;
-  public textDetail = '<p>Some html</p>';
-
+  public name: string;
   constructor(public http: HttpService) {
   }
 
@@ -28,9 +28,8 @@ export class HomeComponent implements OnInit {
       console.log(response);
       if (status === 200) {
         const rsp = JSON.parse(response);
-        const img = '<img class="camera" src="' + rsp.data.image_url + '" alt="">';
-        console.log(img);
-        this.textDetail += img;
+        this.imgUrl = rsp.data.image_url;
+        this.img = '<img class="camera" src="' + rsp.data.image_url + '" alt="">';
       } else {
         console.log(response);
       }
@@ -48,5 +47,29 @@ export class HomeComponent implements OnInit {
       });
   }
 
-}
+  sub() {
+    if (!this.name || this.name.length === 0) { alert('请输入名字'); return; }
+    if (!this.img || this.img.length === 0) { alert('请上传图片'); return; }
 
+    this.http.post('/bannerAdd', {
+      name: this.name,
+      image: this.imgUrl
+    })
+      .subscribe(e => {
+        console.log(e);
+      });
+    // const z = (a && b) ? () => {
+    //   console.log('ok');
+
+    // return this.http.post('/bannerAdd', {
+    //   name: this.name,
+    //   image: this.img
+    // })
+    //   .subscribe(e => {
+    //     console.log(e);
+    //   });
+    // } : '条件不足';
+    // console.log(z);
+
+  }
+}

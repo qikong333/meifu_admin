@@ -1,3 +1,47 @@
-<p>
-  products works!
-</p>
+<div>
+  新闻标题：
+  <input type="text" name="" id="">
+</div>
+
+<div>
+  产品图：
+  <input type="file" name="" id="">
+</div>
+
+<div>
+  作者：
+  <input type="text" name="" id="">
+</div>
+
+<div>
+
+  新闻内容：
+  <quill-editor [style]="{height: '500px'}" [(ngModel)]="textDetail">
+    <div quill-editor-toolbar>
+      <span class="ql-formats">
+        <button type="button" class="ql-header" value="1"></button>
+        <button type="button" class="ql-header" value="2"></button>
+        <button type="button" class="ql-blockquote"></button>
+        <button type="button" class="ql-code-block ql-active"></button>
+        <button type="button" class="ql-list" value="ordered"></button>
+      </span>
+      <span class="ql-formats">
+        <button type="button" class="ql-link"></button>
+        <button type="button" style="outline:none">
+          <label for="file" class="upload_img">
+            <svg class="camera" viewBox="0 0 18 18">
+              <rect class="ql-stroke" height="10" width="12" x="3" y="4"></rect>
+              <circle class="ql-fill" cx="6" cy="7" r="1"></circle>
+              <polyline class="ql-even ql-fill" points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12"></polyline>
+            </svg>
+            <input style="display:none" id="file" type="file" class="file_input" ng2FileSelect [uploader]="uploader2" />
+          </label>
+        </button>
+      </span>
+      <span class="ql-formats">
+        <p style="font-size: 9px;" *ngIf="uploader2?.queue.length > 0">图片已上传：{{ uploader2?.queue.length > 0 ?
+          uploader2?.queue[uploader2?.queue.length-1]?.progress : 0 }}%</p>
+      </span>
+    </div>
+  </quill-editor>
+</div>
