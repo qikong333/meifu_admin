@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
+import { URL } from '../../config/config';
+import { HttpService } from '../../service/http.service';
 
 @Component({
   selector: 'app-newes',
@@ -8,8 +10,11 @@ import { FileUploader } from 'ng2-file-upload';
 })
 export class NewesComponent implements OnInit {
   public uploader2: FileUploader;
-  public textDetail = '<p>Some html</p>';
-  constructor() { }
+  public content = '<p>Some html</p>';
+  public title: string;
+  public author: string;
+  public source: string;
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
     this.uploader2 = new FileUploader({
@@ -22,13 +27,29 @@ export class NewesComponent implements OnInit {
       console.log(response);
       if (status === 200) {
         const rsp = JSON.parse(response);
-        const img = '<img class="camera" src="' + rsp.data.image_url + '" alt="">';
-        console.log(img);
-        this.textDetail += img;
+        this.content += '<img class="camera" src="' + rsp.data.image_url + '" alt="">';
       } else {
         console.log(response);
       }
     };
   }
 
+
+
+  sub() {
+    if (!this.title || this.title.length === 0) { alert('请输入标题'); return; }
+    if (!this.content || this.content.length === 0) { alert('请输入内容'); return; }
+
+    this.http.post('/bannerAdd', {
+      title: this.title,
+      author: this.author,
+      content: this.content,
+      source: this.source
+    })
+      .subscribe(e => {
+        console.log(e);
+        const a = (e['code'] === 200) ? '上传成功' : '上传失败';
+        alert(a);
+      });
+  }
 }

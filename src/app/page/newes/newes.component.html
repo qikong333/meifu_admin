@@ -1,16 +1,17 @@
 <div>
   新闻标题：
-  <input type="text" name="" id="">
+  <input type="text" name="" id="" [(ngModel)]="title">
 </div>
 
 <div>
   作者：
-  <input type="text" name="" id="">
+  <input type="text" name="" id="" [(ngModel)]="author">
 </div>
+
 <div>
 
   新闻内容：
-  <quill-editor [style]="{height: '500px'}" [(ngModel)]="textDetail">
+  <quill-editor [style]="{height: '500px'}" [(ngModel)]="content">
     <div quill-editor-toolbar>
       <span class="ql-formats">
         <button type="button" class="ql-header" value="1"></button>
@@ -38,4 +39,12 @@
       </span>
     </div>
   </quill-editor>
+</div>
+
+<div>
+  来源：<input type="text" name="" id="" [(ngModel)]="source">
+</div>
+
+<div>
+  <input type="button" value="提交" (click)="sub()">
 </div>

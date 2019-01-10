@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { URL } from '../../config/config';
 import { HttpService } from '../../service/http.service';
-import { Subscriber } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -36,17 +35,6 @@ export class HomeComponent implements OnInit {
     };
   }
 
-  upload() {
-    const p = {
-      name: '444',
-      image: '222222'
-    };
-    this.http.post('/bannerAdd', p)
-      .subscribe(e => {
-        console.log(e);
-      });
-  }
-
   sub() {
     if (!this.name || this.name.length === 0) { alert('请输入名字'); return; }
     if (!this.img || this.img.length === 0) { alert('请上传图片'); return; }
@@ -57,19 +45,8 @@ export class HomeComponent implements OnInit {
     })
       .subscribe(e => {
         console.log(e);
+        const a = (e['code'] === 200) ? '上传成功' : '上传失败';
+        alert(a);
       });
-    // const z = (a && b) ? () => {
-    //   console.log('ok');
-
-    // return this.http.post('/bannerAdd', {
-    //   name: this.name,
-    //   image: this.img
-    // })
-    //   .subscribe(e => {
-    //     console.log(e);
-    //   });
-    // } : '条件不足';
-    // console.log(z);
-
   }
 }
