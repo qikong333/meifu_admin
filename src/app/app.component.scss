@@ -1,0 +1,20 @@
+ul {
+  width: 100%;
+  display: flex;
+  margin-bottom: 20px;
+
+  li {
+    float: left;
+    width: 150px;
+    text-align: center;
+    font-weight: bold;
+    padding: 20px 0;
+    border: 1px solid rgb(21, 139, 218);
+    background: #fff;
+
+    &.active {
+      background: #1091a5;
+      color: #fff;
+    }
+  }
+}

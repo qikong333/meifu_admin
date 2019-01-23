@@ -28,7 +28,8 @@ import { ProductsComponent } from './page/products/products.component';
     CommonModule,
     FileUploadModule, FormsModule, HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   public imgUrl: string;
   public uploader2: FileUploader;
   public name: string;
+  public datas = [];
   constructor(public http: HttpService) {
   }
 
@@ -33,6 +34,12 @@ export class HomeComponent implements OnInit {
         console.log(response);
       }
     };
+
+    this.http.get('/bannerGet')
+      .subscribe(r => {
+        console.log(r);
+        this.datas = r['data'];
+      });
   }
 
   sub() {

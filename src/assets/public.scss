@@ -1,0 +1,17 @@
+ .databod {
+   ul {
+     display: flex;
+     width: 100%;
+
+     li {
+       text-align: center;
+       float: left;
+       flex: 1 1;
+       align-items: center;
+     }
+   }
+ }
+
+ div {
+   padding: 10px;
+ }

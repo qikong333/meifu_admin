@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
       if (status === 200) {
         const rsp = JSON.parse(response);
         this.imgUrl = rsp.data.image_url;
-        this.img = '<img class="camera" src="' + rsp.data.image_url + '" alt="">';
+        this.img = `<img class="camera" src="${rsp.data.image_url}" alt="">`;
       } else {
         console.log(response);
       }
@@ -58,7 +58,7 @@ export class ProductsComponent implements OnInit {
 
   sub() {
     if (!this.name || this.name.length === 0) { alert('请输入标题'); return; }
-    if (!this.img || this.img.length === 0) { alert('请上传产品图'); return; }
+    if (!this.imgUrl || this.imgUrl.length === 0) { alert('请上传产品图'); return; }
     if (!this.info || this.info.length === 0) { alert('请输入简介'); return; }
     if (!this.content || this.content.length === 0) { alert('请输入内容'); return; }
 
