@@ -62,7 +62,7 @@ export class ProductsComponent implements OnInit {
     if (!this.info || this.info.length === 0) { alert('请输入简介'); return; }
     if (!this.content || this.content.length === 0) { alert('请输入内容'); return; }
 
-    this.http.post('/bannerAdd', {
+    this.http.post('/producAdd', {
       name: this.name,
       img: this.imgUrl,
       info: this.info,

@@ -14,9 +14,14 @@ export class NewesComponent implements OnInit {
   public title: string;
   public author: string;
   public source: string;
+  public newsList: Array<any>;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
+
+    this.newGet();
+
+
     this.uploader2 = new FileUploader({
       url: URL + '/upLoad'
       , method: 'POST'
@@ -40,7 +45,7 @@ export class NewesComponent implements OnInit {
     if (!this.title || this.title.length === 0) { alert('请输入标题'); return; }
     if (!this.content || this.content.length === 0) { alert('请输入内容'); return; }
 
-    this.http.post('/bannerAdd', {
+    this.http.post('/newAdd', {
       title: this.title,
       author: this.author,
       content: this.content,
@@ -49,7 +54,15 @@ export class NewesComponent implements OnInit {
       .subscribe(e => {
         console.log(e);
         const a = (e['code'] === 200) ? '上传成功' : '上传失败';
+        this.newGet();
         alert(a);
+      });
+  }
+
+  newGet() {
+    this.http.get('/newGet')
+      .subscribe(r => {
+        this.newsList = r['data'];
       });
   }
 }

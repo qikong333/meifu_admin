@@ -1,50 +1,72 @@
-<div>
-  新闻标题：
-  <input type="text" name="" id="" [(ngModel)]="title">
+<div class="left">
+
+  <div>
+    新闻标题：
+    <input type="text" name="" id="" [(ngModel)]="title">
+  </div>
+
+  <div>
+    作者：
+    <input type="text" name="" id="" [(ngModel)]="author">
+  </div>
+
+  <div>
+
+    新闻内容：
+    <quill-editor [style]="{height: '500px'}" [(ngModel)]="content">
+      <div quill-editor-toolbar>
+        <span class="ql-formats">
+          <button type="button" class="ql-header" value="1"></button>
+          <button type="button" class="ql-header" value="2"></button>
+          <button type="button" class="ql-blockquote"></button>
+          <button type="button" class="ql-code-block ql-active"></button>
+          <button type="button" class="ql-list" value="ordered"></button>
+        </span>
+        <span class="ql-formats">
+          <button type="button" class="ql-link"></button>
+          <button type="button" style="outline:none">
+            <label for="file" class="upload_img">
+              <svg class="camera" viewBox="0 0 18 18">
+                <rect class="ql-stroke" height="10" width="12" x="3" y="4"></rect>
+                <circle class="ql-fill" cx="6" cy="7" r="1"></circle>
+                <polyline class="ql-even ql-fill" points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12"></polyline>
+              </svg>
+              <input style="display:none" id="file" type="file" class="file_input" ng2FileSelect [uploader]="uploader2" />
+            </label>
+          </button>
+        </span>
+        <span class="ql-formats">
+          <p style="font-size: 9px;" *ngIf="uploader2?.queue.length > 0">图片已上传：{{ uploader2?.queue.length > 0 ?
+            uploader2?.queue[uploader2?.queue.length-1]?.progress : 0 }}%</p>
+        </span>
+      </div>
+    </quill-editor>
+  </div>
+
+  <div>
+    来源：<input type="text" name="" id="" [(ngModel)]="source">
+  </div>
+
+  <div>
+    <input type="button" value="提交" (click)="sub()">
+  </div>
+
 </div>
-
-<div>
-  作者：
-  <input type="text" name="" id="" [(ngModel)]="author">
-</div>
-
-<div>
-
-  新闻内容：
-  <quill-editor [style]="{height: '500px'}" [(ngModel)]="content">
-    <div quill-editor-toolbar>
-      <span class="ql-formats">
-        <button type="button" class="ql-header" value="1"></button>
-        <button type="button" class="ql-header" value="2"></button>
-        <button type="button" class="ql-blockquote"></button>
-        <button type="button" class="ql-code-block ql-active"></button>
-        <button type="button" class="ql-list" value="ordered"></button>
-      </span>
-      <span class="ql-formats">
-        <button type="button" class="ql-link"></button>
-        <button type="button" style="outline:none">
-          <label for="file" class="upload_img">
-            <svg class="camera" viewBox="0 0 18 18">
-              <rect class="ql-stroke" height="10" width="12" x="3" y="4"></rect>
-              <circle class="ql-fill" cx="6" cy="7" r="1"></circle>
-              <polyline class="ql-even ql-fill" points="5 12 5 11 7 9 8 10 11 7 13 9 13 12 5 12"></polyline>
-            </svg>
-            <input style="display:none" id="file" type="file" class="file_input" ng2FileSelect [uploader]="uploader2" />
-          </label>
-        </button>
-      </span>
-      <span class="ql-formats">
-        <p style="font-size: 9px;" *ngIf="uploader2?.queue.length > 0">图片已上传：{{ uploader2?.queue.length > 0 ?
-          uploader2?.queue[uploader2?.queue.length-1]?.progress : 0 }}%</p>
-      </span>
-    </div>
-  </quill-editor>
-</div>
-
-<div>
-  来源：<input type="text" name="" id="" [(ngModel)]="source">
-</div>
-
-<div>
-  <input type="button" value="提交" (click)="sub()">
+<div class="right">
+  <p>新闻列表</p>
+  <ul class="ul1">
+    <li>id</li>
+    <li>标题</li>
+    <li>作者</li>
+    <li>操作</li>
+  </ul>
+  <ul class="ul2" *ngFor="let d of newsList">
+    <li>{{d.id}}</li>
+    <li>{{d.title}}</li>
+    <li>{{d.author}}</li>
+    <li>
+      <button (click)="delet(d.id)">删除</button>
+      <button (click)="edit(d.id)">编辑</button>
+    </li>
+  </ul>
 </div>
