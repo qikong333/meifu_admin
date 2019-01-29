@@ -54,14 +54,14 @@ export class NewesComponent implements OnInit {
         author: this.author,
         content: this.content,
         source: this.source
-      }
+      };
     } else {
       p = {
         title: this.title,
         author: this.author,
         content: this.content,
         source: this.source
-      }
+      };
     }
     this.http.post('/newAdd', p)
       .subscribe(e => {

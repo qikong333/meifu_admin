@@ -17,9 +17,14 @@ export class ProductsComponent implements OnInit {
   public author: string;
   public uploader1;
   public uploader2;
+  public productList;
+  public productID;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
+
+    this.producGet();
+
     this.uploader1 = new FileUploader({
       url: URL + '/upLoad'
       , method: 'POST'
@@ -62,17 +67,60 @@ export class ProductsComponent implements OnInit {
     if (!this.info || this.info.length === 0) { alert('请输入简介'); return; }
     if (!this.content || this.content.length === 0) { alert('请输入内容'); return; }
 
-    this.http.post('/producAdd', {
+    const p = {
       name: this.name,
-      img: this.imgUrl,
-      info: this.info,
+      author: this.author,
       content: this.content,
-      author: this.author
-    })
+      info: this.info,
+      img: this.imgUrl
+    };
+    if (this.productID && this.productID.length > 0) {
+      p['id'] = this.productID;
+    }
+
+    this.http.post('/producAdd', p)
       .subscribe(e => {
         console.log(e);
         const a = (e['code'] === 200) ? '上传成功' : '上传失败';
+        this.name = '';
+        this.author = '';
+        this.content = '';
+        this.info = '';
+        this.imgUrl = '';
+        this.productID = '';
+        this.img = '';
+        this.producGet();
         alert(a);
+      });
+  }
+
+  producGet() {
+    this.http.get('/producGet')
+      .subscribe(r => {
+        this.productList = r['data'];
+      });
+  }
+
+  delet(id) {
+    this.http.get('/producDelete', { id })
+      .subscribe(r => {
+        alert('删除成功');
+        this.productList = this.productList.filter(a => a.id !== id);
+      });
+  }
+
+
+  edit(id) {
+    this.productID = id;
+    this.http.get('/producGet', { id })
+      .subscribe(r => {
+        console.log(r);
+        this.imgUrl = r['data']['0']['img'];
+        this.img = `<img class="camera" src="${this.imgUrl}" alt="">`;
+        this.name = r['data']['0']['name'];
+        this.author = r['data']['0']['author'];
+        this.content = r['data']['0']['content'];
+        this.info = r['data']['0']['info'];
       });
   }
 }

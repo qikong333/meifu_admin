@@ -1,1 +1,13 @@
-@import "../../../assets/public.scss"
+@import "../../../assets/public.scss";
+
+.right {
+  ul {
+    li {
+      width: 33%;
+
+      img {
+        width: 150px;
+      }
+    }
+  }
+}

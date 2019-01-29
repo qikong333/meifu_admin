@@ -1,32 +1,32 @@
-<div>
-  banner名称：
-  <input type="text" name="" id="" [(ngModel)]="name">
+<div class="left">
+  <div>
+    banner名称：
+    <input type="text" name="" id="" [(ngModel)]="name">
+  </div>
+  <div>
+    图片上传：
+    <input id="file" type="file" class="file_input" ng2FileSelect [uploader]="uploader2" />
+    <div [innerHTML]='img'></div>
+  </div>
+  <div>
+    <input type="button" value="提交" (click)="sub()">
+  </div>
 </div>
-<div>
-  图片上传：
-  <input id="file" type="file" class="file_input" ng2FileSelect [uploader]="uploader2" />
-  <div [innerHTML]='img'></div>
-</div>
 
-
-<div>
-  <input type="button" value="提交" (click)="sub()">
-</div>
-
-
-<!-- <div class="databod">
+<div class="right">
+  <p>banner列表</p>
   <ul class="ul1">
     <li>id</li>
-    <li>图片名称</li>
-    <li>图片地址</li>
+    <li>标题</li>
     <li>图片</li>
     <li>操作</li>
   </ul>
   <ul class="ul2" *ngFor="let d of datas">
     <li>{{d.id}}</li>
-    <li>{{d.image}}</li>
     <li><img [src]="d.image" alt=""></li>
-    <li><input type="button" value="删除" (click)="del(d.id)"></li>
+    <li>{{d.name}}</li>
+    <li>
+      <button (click)="delet(d.id)">删除</button>
+    </li>
   </ul>
-
-</div> -->
+</div>
